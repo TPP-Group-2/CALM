@@ -13,3 +13,6 @@ make
 
 # Document
 [link](https://hackmd.io/5ISSMMl1SnajAVD9l2HKPg)
+
+# Merge into one file
+https://www.npmjs.com/package/codingame-cpp-merge
