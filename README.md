@@ -12,7 +12,7 @@ or
 make
 
 # Document
-[link](https://hackmd.io/5ISSMMl1SnajAVD9l2HKPg)
+[link](https://hackmd.io/@TPPG2/HyvEG8NXc)
 
 # Merge into one file
 https://www.npmjs.com/package/codingame-cpp-merge
