@@ -50,7 +50,7 @@ int parseItem(const char* str){
 }
 
 bool matchItem(int item, int request){
-    if(item & (!request))
+    if(item & (~request))
         return false;
     return true;
 }
