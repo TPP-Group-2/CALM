@@ -1,5 +1,12 @@
-*.out
-*.o
-.*
-test.cpp
-merged
+# binary build result (CMake, Pandoc, Zip)
+*build/
+*.exe
+*.pdf
+*.zip
+
+# temp file
+tmp/
+
+# configure file
+config/
+*.conf
