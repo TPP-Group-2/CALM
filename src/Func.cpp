@@ -1,5 +1,5 @@
-#include "myStruct.h"
 #include "Func.h"
+#include "myStruct.h"
 
 int parseItem(const std::string &request){
     size_t start = 0;
@@ -13,34 +13,34 @@ int parseItem(const std::string &request){
     int ret = 0;
     for(auto &it : parseWords){
         if(it == "DISH"){
-            ret |= (1 << DISH);
+            ret |= (1 << static_cast<int>(Material::DISH));
         }
         else if(it == "BLUEBERRIES"){
-            ret |= (1 << BLUEBERRIES);
+            ret |= (1 << static_cast<int>(Material::BLUEBERRIES));
         }
         else if(it == "ICE_CREAM"){
-            ret |= (1 << ICE_CREAM);
+            ret |= (1 << static_cast<int>(Material::ICE_CREAM));
         }
         else if(it == "STRAWBERRIES"){
-            ret |= (1 << STRAWBERRIES);
+            ret |= (1 << static_cast<int>(Material::STRAWBERRIES));
         }
         else if(it == "CHOPPED_STRAWBERRIES"){
-            ret |= (1 << CHOPPED_STRAWBERRIES);
+            ret |= (1 << static_cast<int>(Material::CHOPPED_STRAWBERRIES));
         }
         else if(it == "DOUGH"){
-            ret |= (1 << DOUGH);
+            ret |= (1 << static_cast<int>(Material::DOUGH));
         }
         else if(it == "CHOPPED_DOUGH"){
-            ret |= (1 << CHOPPED_DOUGH);
+            ret |= (1 << static_cast<int>(Material::CHOPPED_DOUGH));
         }
         else if(it == "CROISSANT"){
-            ret |= (1 << CROISSANT);
+            ret |= (1 << static_cast<int>(Material::CROISSANT));
         }
         else if(it == "RAW_TART"){
-            ret |= (1 << RAW_TART);
+            ret |= (1 << static_cast<int>(Material::RAW_TART));
         }
         else if(it == "TART"){
-            ret |= (1 << TART);
+            ret |= (1 << static_cast<int>(Material::TART));
         }
     }
     return ret;

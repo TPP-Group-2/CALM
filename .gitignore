@@ -1,11 +1,14 @@
 # binary build result (CMake, Pandoc, Zip)
 *build/
 *.exe
+*.so
 *.pdf
 *.zip
 
 # temp file
 tmp/
+*.gch
+*.o
 
 # configure file
 config/

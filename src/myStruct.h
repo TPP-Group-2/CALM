@@ -67,18 +67,17 @@ enum Equipment {
 };
 
 // materials
-enum Material {
-    DISH,
-    BLUEBERRIES,
-    ICE_CREAM,
-    STRAWBERRIES,
-    CHOPPED_STRAWBERRIES,
-    DOUGH,
-    CHOPPED_DOUGH,
-    CROISSANT,
-    RAW_TART,
-    TART,
-    SIZE_OF_MATERIAL
+enum class Material: int {
+    DISH = 0,
+    BLUEBERRIES = 1,
+    ICE_CREAM = 2,
+    STRAWBERRIES = 3,
+    CHOPPED_STRAWBERRIES = 4,
+    DOUGH = 5,
+    CHOPPED_DOUGH = 6,
+    CROISSANT = 7,
+    RAW_TART = 8,
+    TART = 9
 };
 
 

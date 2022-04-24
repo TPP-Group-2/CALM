@@ -6,11 +6,12 @@
 #include <unordered_map>
 #include "myStruct.h"
 
-class Chef;
+enum class Material;
+struct Coordinate;
 
 class Kitchen {
 public:
-    Kitchen();
+    Kitchen() = default;
     Kitchen(const std::vector<std::string> &v);
     Kitchen(const std::string str[]);
     

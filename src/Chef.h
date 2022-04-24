@@ -1,12 +1,14 @@
 #ifndef CHEF_H
 #define CHEF_H
 
+#include "myStruct.h"
+
 struct Coordinate;
 class Kitchen;
 
 class Chef {
 public:
-    Chef();
+    Chef()=default;
     Chef(const Kitchen& _kitchen);
     
     void changeKitchen(const Kitchen& _kitchen);

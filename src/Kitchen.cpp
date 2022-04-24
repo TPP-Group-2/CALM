@@ -116,8 +116,8 @@ Kitchen::Kitchen(const std::string str[]){
 }
 
 std::vector<Coordinate> Kitchen::search(Material item) const {
-    if(mt.find(item) != mt.end()){
-        return mt.at(item);
+    if(mt.find(static_cast<int>(item)) != mt.end()){
+        return mt.at(static_cast<int>(item));
     }
     return std::vector<Coordinate> ();
 }
@@ -180,6 +180,7 @@ void Kitchen::clearTable(){
     }
     if(!mt.empty())
         mt.clear();
+
     return;
 }
 void Kitchen::setTable(int item, const Coordinate &pos){

@@ -1,6 +1,5 @@
-#include "myStruct.h"
-#include "Kitchen.h"
 #include "Chef.h"
+#include "Kitchen.h"
 
 Chef::Chef(const Kitchen& _kitchen) : kitchen(&_kitchen) {
 
