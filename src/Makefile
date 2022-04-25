@@ -13,6 +13,7 @@ calm.so: Chef.o Func.o Kitchen.o
 main: main.o calm.so 
 main: LDFLAGS += -Wl,-rpath=.
 
+
 all: $(TARGETS)
 	@
 
@@ -29,12 +30,17 @@ one-file:
 test: one-file
 	$(CXX) -o $(BUILD_DIR)compress$(EXEEXT) compress.cpp $(LDFLAGS)
 
-BACKUP = test -f $(1) && mv $(1) $(1).old || true
-DELETE_BACKUP = test -f $(1).old && $(RM) $(1) $(1).old || true
-
 .PHONY: all clean one-file test
 
+
 OBJECTS = $(patsubst %cpp,%o,$(wildcard *.cpp))
+BUILD_DIR = ./
+
+ifeq ($(OS),Windows_NT)
+	EXEEXT = .exe
+else
+	EXEEXT = .out
+endif
 
 $(OBJECTS):%o:%cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<

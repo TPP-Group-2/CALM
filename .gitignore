@@ -1,6 +1,7 @@
 # binary build result (CMake, Pandoc, Zip)
 *build/
 *.exe
+*.out
 *.so
 *.pdf
 *.zip

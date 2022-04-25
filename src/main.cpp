@@ -51,8 +51,8 @@ int main(){
     player[0].getTarget() = 0;
 
     // game loop
-    while(1){
-        int remainTurns;
+    int remainTurns = 200;
+    do {
         std::cin >>remainTurns; std::cin.ignore();
         for(int i = 0; i < 2; i++){
             Coordinate pos;
@@ -207,5 +207,5 @@ int main(){
             std::cout<<"WAIT; nothing to do"<<std::endl;
             break;
         }
-    }
+    } while ((--remainTurns) > 0);
 }
