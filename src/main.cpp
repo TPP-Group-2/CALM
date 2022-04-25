@@ -51,8 +51,8 @@ int main(){
     player[0].getTarget() = 0;
 
     // game loop
-    while(1){
-        int remainTurns;
+    int remainTurns = 200;
+    do {
         std::cin >>remainTurns; std::cin.ignore();
         for(int i = 0; i < 2; i++){
             Coordinate pos;
@@ -77,11 +77,11 @@ int main(){
         }
 
         // set source materials location
-        kitchen.setTable(1 << DISH, kitchen.locate(DISH_WASHER));
-        kitchen.setTable(1 << BLUEBERRIES, kitchen.locate(BLUEBERRIES_CRATE));
-        kitchen.setTable(1 << ICE_CREAM, kitchen.locate(ICE_CREAM_CRATE));
-        kitchen.setTable(1 << STRAWBERRIES, kitchen.locate(STRAWBERRIES_CRATE));
-        kitchen.setTable(1 << DOUGH, kitchen.locate(DOUGH_CRATE));
+        kitchen.setTable(1 << static_cast<int>(Material::BLUEBERRIES), kitchen.locate(BLUEBERRIES_CRATE));
+        kitchen.setTable(1 << static_cast<int>(Material::ICE_CREAM), kitchen.locate(ICE_CREAM_CRATE));
+        kitchen.setTable(1 << static_cast<int>(Material::STRAWBERRIES), kitchen.locate(STRAWBERRIES_CRATE));
+        kitchen.setTable(1 << static_cast<int>(Material::DOUGH), kitchen.locate(DOUGH_CRATE));
+        kitchen.setTable(1 << static_cast<int>(Material::DISH), kitchen.locate(DISH_WASHER));
 
         std::string ovenContent; // ignore until wood 1 league
         int ovenTimer;
@@ -123,7 +123,7 @@ int main(){
         do {
             switch (phase) {
             case MAKING_STRAWBERRIES:
-                if(chef.has(CHOPPED_STRAWBERRIES))
+                if(chef.has(static_cast<int>(Material::CHOPPED_STRAWBERRIES)))
                     phase = THINKING;
                 break;
             case GATHERING:
@@ -135,9 +135,9 @@ int main(){
 
             default:
                 // want && don't have && can't find on table
-                if(chef.want(CHOPPED_STRAWBERRIES)
-                    && (!chef.has(CHOPPED_STRAWBERRIES))
-                    && chef.find(partner, 1 << CHOPPED_STRAWBERRIES).x == -1){
+                if(chef.want(static_cast<int>(Material::CHOPPED_STRAWBERRIES))
+                    && (!chef.has(static_cast<int>(Material::CHOPPED_STRAWBERRIES)))
+                    && chef.find(partner, 1 << static_cast<int>(Material::CHOPPED_STRAWBERRIES)).x == -1){
                     phase = MAKING_STRAWBERRIES;
                 }
                 if(phase == THINKING){
@@ -156,7 +156,7 @@ int main(){
         Coordinate dest;
         case MAKING_STRAWBERRIES:
             // if carring something not strawberries
-            if(carriedItem != 0 && carriedItem != (1 << STRAWBERRIES)){
+            if(carriedItem != 0 && carriedItem != (1 << static_cast<int>(Material::STRAWBERRIES))){
                 // find nearest empty table
                 dest = chef.find(partner, 0);
                 std::cout<<"USE "<<dest.y<<" "<<dest.x<<"; place dish"<<std::endl;
@@ -165,7 +165,7 @@ int main(){
             // if not holding anything
             else if(carriedItem == 0){
                 // find nearest strawberries
-                dest = chef.find(partner, 1 << STRAWBERRIES);
+                dest = chef.find(partner, 1 << static_cast<int>(Material::STRAWBERRIES));
                 std::cout<<"USE "<<dest.y<<" "<<dest.x<<"; get strawberries"<<std::endl;
                 break;
             }
@@ -207,5 +207,5 @@ int main(){
             std::cout<<"WAIT; nothing to do"<<std::endl;
             break;
         }
-    }
+    } while ((--remainTurns) > 0);
 }

@@ -1,5 +1,16 @@
+# binary build result (CMake, Pandoc, Zip)
+*build/
+*.exe
 *.out
+*.so
+*.pdf
+*.zip
+
+# temp file
+tmp/
+*.gch
 *.o
-.*
-test.cpp
-merged
+
+# configure file
+config/
+*.conf
