@@ -9,25 +9,30 @@ LDFLAGS = -lm
 
 
 TARGETS = calm.so main 
-calm.so: Chef.o Func.o Kitchen.o
-main: main.o calm.so
-
+calm.so: Chef.o Func.o Kitchen.o 
+main: main.o calm.so 
+main: LDFLAGS += -Wl,-rpath=.
 
 all: $(TARGETS)
 	@
 
 clean:
-	$(RM) $(OBJECTS)
+	-$(RM) $(OBJECTS)
 	-$(RM) compress.cpp
 
 one-file:
-	cat myStruct.h Kitchen.h Chef.h Func.h *.cpp | sed 's/\\s*\#include\\s*\"/\\/\\/ \#include \"/' > $(BUILD_DIR)compress.cpp
+	-$(RM) $(BUILD_DIR)compress.cpp
+	cat myStruct.h Kitchen.h Chef.h Func.h | sed 's/\s*\#include\s*\"/\/\/ \#include \"/' > $(BUILD_DIR)compress
+	cat Kitchen.cpp Chef.cpp Func.cpp main.cpp | sed 's/\s*\#include\s*\"/\/\/ \#include \"/' >> $(BUILD_DIR)compress
+	mv $(BUILD_DIR)compress $(BUILD_DIR)compress.cpp
 
 test: one-file
 	$(CXX) -o $(BUILD_DIR)compress$(EXEEXT) compress.cpp $(LDFLAGS)
 
-.PHONY: all clean one-file test
+BACKUP = test -f $(1) && mv $(1) $(1).old || true
+DELETE_BACKUP = test -f $(1).old && $(RM) $(1) $(1).old || true
 
+.PHONY: all clean one-file test
 
 OBJECTS = $(patsubst %cpp,%o,$(wildcard *.cpp))
 
@@ -39,9 +44,8 @@ POST_BUILD_TARGETS = $(filter-out $(PRE_BUILD_TARGETS),$(TARGETS))
 
 $(PRE_BUILD_TARGETS): CPPFLAGS += -fPIC
 $(PRE_BUILD_TARGETS): LDFLAGS += -shared
-$(PRE_BUILD_TARGETS):%.so:
+$(PRE_BUILD_TARGETS):
 	$(CXX) -o $(BUILD_DIR)$@ $^ $(LDFLAGS)
 
-$(POST_BUILD_TARGETS): $(PRE_BUILD_TARGETS)
+$(POST_BUILD_TARGETS):
 	$(CXX) -o $(BUILD_DIR)$@$(EXEEXT) $^ $(LDFLAGS)
-
